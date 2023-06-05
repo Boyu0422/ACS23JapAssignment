@@ -45,7 +45,7 @@ import java.io.Serial;
  * 9. refreshInterface
  * Constants list:
  * 1. DEFAULT_DIMENSION
- * 2. frame
+ * 2. serialVersionUID
  * Purpose: The class implements the user interface for game battleship
  * @author Boyu Li
  * @version 1.0
