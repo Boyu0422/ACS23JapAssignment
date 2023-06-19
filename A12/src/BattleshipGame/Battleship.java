@@ -230,17 +230,21 @@ public class Battleship extends JFrame{
     /**
      * The default dimension for the game
      * */
-    static final Integer DEFAULT_DIMENSION = 8;
+    static final Integer DEFAULT_DIMENSION = 5;
 
     /**
      * The x coordinates of the grid on the panel
      * */
-    JPanel XCoordinates;
+    JPanel XCoordinatesUserPanel;
 
     /**
      * The y coordinates of the grid on the panel
      * */
-    JPanel YCoordinates;
+    JPanel YCoordinatesUserPanel;
+
+    JPanel XCoordinatesAdversaryPanel;
+
+    JPanel YCoordinatesAdversaryPanel;
 
     /**
      * The panel to display the grid of user panel
@@ -297,7 +301,7 @@ public class Battleship extends JFrame{
      * Purpose: To initialize the main interface and the component of the game
      * Algorithm: The method utilizes the Java Swing to visualize the main window of the game
      * */
-    public void initializeMainWindow() {
+        public void initializeMainWindow() {
         //Set up and initialize of the main windows with the basic characters
         setTitle(TITLE);
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 1, 1);
@@ -424,9 +428,9 @@ public class Battleship extends JFrame{
         GridLayout gridLayout1 = new GridLayout(1, DEFAULT_DIMENSION, 1, 1);
 
         //Set up and initialize the X coordinates of the user panel to display the coordinates of the grid
-        XCoordinates = new JPanel();
-        XCoordinates.setLayout(gridLayout1);
-        XCoordinates.setPreferredSize(new Dimension(337, 50));
+        XCoordinatesUserPanel = new JPanel();
+        XCoordinatesUserPanel.setLayout(gridLayout1);
+        XCoordinatesUserPanel.setPreferredSize(new Dimension(337, 50));
 
         //Initialize and set up the label of letter I and add it to the user panel
         panelI = new JPanel();
@@ -441,24 +445,24 @@ public class Battleship extends JFrame{
             char letter = (char) i;
             String letterString = Character.toString(letter);
             JLabel coordinateLabel = new JLabel(letterString, JLabel.CENTER);
-            XCoordinates.add(coordinateLabel);
+            XCoordinatesUserPanel.add(coordinateLabel);
         }
-        userPanel.add(XCoordinates);
+        userPanel.add(XCoordinatesUserPanel);
 
         //Set up and initialize the Y coordinates of the user panel to display the coordinates of the grid
         GridLayout gridLayout2 = new GridLayout(DEFAULT_DIMENSION, 1, 1, 1);
-        YCoordinates = new JPanel();
-        YCoordinates.setPreferredSize(new Dimension(50, 337));
-        YCoordinates.setLayout(gridLayout2);
+        YCoordinatesUserPanel = new JPanel();
+        YCoordinatesUserPanel.setPreferredSize(new Dimension(50, 337));
+        YCoordinatesUserPanel.setLayout(gridLayout2);
 
         //Use double for loop to fulfil all the Y coordinates for user panel
         for (int i = 65; i < DEFAULT_DIMENSION + 65; i++) {
             char letter = (char) i;
             String letterString = Character.toString(letter);
             JLabel coordinateLabel = new JLabel(letterString, JLabel.CENTER);
-            YCoordinates.add(coordinateLabel);
+            YCoordinatesUserPanel.add(coordinateLabel);
         }
-        userPanel.add(YCoordinates);
+        userPanel.add(YCoordinatesUserPanel);
 
         //Set up the user panel grid
         userGridPanel = new JPanel();
@@ -517,9 +521,9 @@ public class Battleship extends JFrame{
         GridLayout gridLayout1 = new GridLayout(1, DEFAULT_DIMENSION, 1, 1);
 
         //Set up and initialize the X coordinates of the adversary panel to display the coordinates of the grid
-        XCoordinates = new JPanel();
-        XCoordinates.setLayout(gridLayout1);
-        XCoordinates.setPreferredSize(new Dimension(337, 50));
+        XCoordinatesAdversaryPanel = new JPanel();
+        XCoordinatesAdversaryPanel.setLayout(gridLayout1);
+        XCoordinatesAdversaryPanel.setPreferredSize(new Dimension(337, 50));
         panelU = new JPanel();
 
         //Initialize and set up the label of letter U and add it to the adversary panel
@@ -534,26 +538,26 @@ public class Battleship extends JFrame{
             char letter = (char) i;
             String letterString = Character.toString(letter);
             JLabel coordinateLabel = new JLabel(letterString, JLabel.CENTER);
-            XCoordinates.add(coordinateLabel);
+            XCoordinatesAdversaryPanel.add(coordinateLabel);
         }
-        adversaryPanel.add(XCoordinates);
+        adversaryPanel.add(XCoordinatesAdversaryPanel);
 
         //Set up and initialize the Y coordinates of the adversary panel to display the coordinates of the grid
         GridLayout gridLayout2 = new GridLayout(DEFAULT_DIMENSION, 1, 1, 1);
-        YCoordinates = new JPanel();
-        YCoordinates.setPreferredSize(new Dimension(50, 337));
-        YCoordinates.setLayout(gridLayout2);
+        YCoordinatesAdversaryPanel = new JPanel();
+        YCoordinatesAdversaryPanel.setPreferredSize(new Dimension(50, 337));
+        YCoordinatesAdversaryPanel.setLayout(gridLayout2);
 
         //Use double for loop to fulfil all the Y coordinates for adversary panel
         for (int i = 65; i < DEFAULT_DIMENSION + 65; i++) {
             char letter = (char) i;
             String letterString = Character.toString(letter);
             JLabel coordinateLabel = new JLabel(letterString, JLabel.CENTER);
-            YCoordinates.add(coordinateLabel);
+            YCoordinatesAdversaryPanel.add(coordinateLabel);
         }
 
         //Set up the adversary panel grid
-        adversaryPanel.add(YCoordinates);
+        adversaryPanel.add(YCoordinatesAdversaryPanel);
         adversaryGridPanel = new JPanel();
         adversaryGridPanel.setPreferredSize(new Dimension(337, 337));
         GridLayout gridLayout3 = new GridLayout(DEFAULT_DIMENSION, DEFAULT_DIMENSION, 1, 1);

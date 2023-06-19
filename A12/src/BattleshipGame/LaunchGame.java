@@ -34,7 +34,7 @@ public class LaunchGame {
      * Algorithm: no
      * @param args - the command line arguments that used to run the project
      * */
-    public static void main(String args[]){
+    public static void main(String[] args){
         Battleship battleship = new Battleship();
         GameController gameController = new GameController(battleship);
     }
