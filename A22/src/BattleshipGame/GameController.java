@@ -262,6 +262,9 @@ public class GameController {
             }
 
             if (e.getSource() == gameView.designModeButton) {
+                //Initialize the direction
+                paraIsVertical = true;
+                
                 //Initialize the live
                 gameModel.calculateLife();
 
