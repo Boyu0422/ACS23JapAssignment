@@ -11,6 +11,7 @@
 
 package BattleshipGame;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -135,9 +136,9 @@ public class GameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == gameView.playButton) {
-                //Start timing when game start
+                gameModel.setGameTime(0);
                 timing();
-
+                //Start timing when game start
                 //Display the life of each player
                 gameView.showLive(gameView.userLifeProgressBar, gameModel.getPlayerLife());
                 gameView.showLive(gameView.adversaryLifeProgressBar, gameModel.getMachineLife());
@@ -210,12 +211,16 @@ public class GameController {
 
                         //If machine player winning the game, then stop the game and display splash
                         if (isMachineWinner) {
+                            gameModel.setGameTime(0);
+                            timing();
                             gameView.gameStopSplash(true);
                             refresh();
                             gameView.playButton.setEnabled(false);
 
                             //If human player winning the game, then stop the game and display splash
                         } else if (isPlayerWinner) {
+                            gameModel.setGameTime(0);
+                            timing();
                             gameView.gameStopSplash(false);
                             refresh();
                             gameView.playButton.setEnabled(false);
@@ -251,17 +256,37 @@ public class GameController {
 
                 //Enter the game string
                 String configStr = gameView.enterString();
-                gameModel.calculateDimension(configStr);
 
-                //Start a new game based on configuration string
-                gameModel.newGame(configStr);
-                gameModel.setPlayerLife(gameModel.getGameDimension() * 2);
-                gameModel.setMachineLife(gameModel.getGameDimension() * 2);
-                gameModel.generateRanShips(false);
-                refresh();
+                //Check if the configuration string is empty
+                if(configStr.isEmpty()){
+
+                    //If so, disable the play button and reset the game
+                    System.out.println(configStr);
+                    gameView.displayHistory(gameView.historyArea,"The game configuration can't be 0!");
+                    gameView.playButton.setEnabled(false);
+                    for (int i = 0; i < gameModel.getGameDimension() * 2; i++) {
+                        for (int j = 0; j < gameModel.getGameDimension() * 2; j++) {
+                            gameView.adversaryPanelGridButtons[i][j].setEnabled(true);
+                            gameView.adversaryPanelGridButtons[i][j].setBackground(gameView.color1);
+                            gameView.userPanelGridButtons[i][j].setEnabled(true);
+                            gameView.userPanelGridButtons[i][j].setBackground(gameView.color1);
+                        }
+                    }
+                }else {
+                    gameModel.calculateDimension(configStr);
+                    //Start a new game based on configuration string
+                    gameModel.newGame(configStr);
+                    gameModel.setPlayerLife(gameModel.getGameDimension() * 2);
+                    gameModel.setMachineLife(gameModel.getGameDimension() * 2);
+                    gameModel.generateRanShips(false);
+                    refresh();
+                }
             }
 
             if (e.getSource() == gameView.designModeButton) {
+                //Initialize the direction
+                paraIsVertical = true;
+                
                 //Initialize the live
                 gameModel.calculateLife();
 
@@ -356,9 +381,8 @@ public class GameController {
                         gameView.userPanelGridButtons[i][j].setBackground(gameView.color1);
                     }
                 }
-
-                //restart the timer and progress bars
                 timing();
+                //restart the timer and progress bars
                 gameView.displayHistory(gameView.historyArea, "You reset the game");
                 gameView.showLive(gameView.userLifeProgressBar, gameModel.getPlayerLife());
                 gameView.showLive(gameView.adversaryLifeProgressBar, gameModel.getMachineLife());

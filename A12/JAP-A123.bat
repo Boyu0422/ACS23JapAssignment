@@ -10,18 +10,20 @@ CLS
 
 SET SRCDIR=src
 SET BINDIR=bin
-SET BINOUT=A12-javac.out
-SET BINERR=A12-javac.err
-SET JARNAME=A12.jar
-SET JAROUT=A12-jar.out
-SET JARERR=A12-jar.err
+SET BINOUT=A22-javac.out
+SET BINERR=A22-javac.err
+SET JARNAME=A22.jar
+SET JAROUT=A22-jar.out
+SET JARERR=A22-jar.err
 SET DOCDIR=doc
 SET DOCPACK=BattleshipGame
-SET DOCERR=A12-javadoc.err
-SET MAINCLASSSRC=src/BattleshipGame/LaunchGame.java
-SET MAINCLASSBIN=BattleshipGame.LaunchGame
-SET SECONDCLASSSRC=src/BattleshipGame/Battleship.java
+SET DOCOUT=A22-javadoc.out
+SET DOCERR=A22-javadoc.err
+SET MAINCLASSSRC=src/BattleshipGame/GameLauncher.java
+SET MAINCLASSBIN=BattleshipGame.GameLauncher
+SET SECONDCLASSSRC=src/BattleshipGame/GameView.java
 SET THIRDCLASSSRC=src/BattleshipGame/GameController.java
+SET FORTHCLASSRC=src/BattleshipGame/GameModel.java
 
 @echo off
 
@@ -51,7 +53,7 @@ ECHO "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 ECHO "[LABS SCRIPT ---------------------]"
 
 ECHO "1. Compiling ......................"
-javac -Xlint -cp ".;%SRCDIR%;%JAVAFXDIR%" %MAINCLASSSRC% %SECONDCLASSSRC% %THIRDCLASSSRC% -d %BINDIR% > %BINOUT% 2> %BINERR%
+javac -Xlint -cp ".;%SRCDIR%;%JAVAFXDIR%" %MAINCLASSSRC% %SECONDCLASSSRC% %THIRDCLASSSRC% %FORTHCLASSRC% -d %BINDIR% > %BINOUT% 2> %BINERR%
 
 ECHO "2. Creating Jar ..................."
 cd bin
@@ -59,7 +61,7 @@ jar cvfe %JARNAME% %MAINCLASSBIN% . > %JAROUT% 2> %JARERR%
 
 ECHO "3. Creating Javadoc ..............."
 cd ..
-javadoc -cp ".;%BINDIR%;../%LIBDIR%" --module-path "%LIBDIR%" -d %DOCDIR% -sourcepath %SRCDIR% -subpackages %DOCPACK% 2> %DOCERR%
+javadoc -cp ".;%BINDIR%;../%LIBDIR%" --module-path "%LIBDIR%" -d %DOCDIR% -sourcepath %SRCDIR% -subpackages %DOCPACK% > %DOCOUT% 2> %DOCERR%
 
 cd bin
 ECHO "4. Running Jar ...................."

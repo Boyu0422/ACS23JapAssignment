@@ -21,21 +21,22 @@ package BattleshipGame;
  * @version 1.0
  * @since 20.0.1
  * */
-public class LaunchGame {
+public class GameLauncher {
     /**
      * Method name: LaunchGame
      * Purpose: Overload constructor
      * Algorithm: no
      * */
-    LaunchGame(){}
+    GameLauncher(){}
     /**
      * Method name: main
      * Purpose: The starting point of the project
      * Algorithm: no
      * @param args - the command line arguments that used to run the project
      * */
-    public static void main(String[] args){
-        Battleship battleship = new Battleship();
-        GameController gameController = new GameController(battleship);
+    public static void main(String args[]){
+        GameModel gameModel = new GameModel();
+        GameView gameView = new GameView();
+        GameController gameController = new GameController(gameView,gameModel);
     }
 }

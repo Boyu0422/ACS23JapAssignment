@@ -518,7 +518,6 @@ public class GameModel {
      * @param configStr - the configuration string
      * */
     public void calculateDimension(String configStr) {
-        if (configStr == null) return;
         gameDimension = (int) Math.sqrt(configStr.length()) / 2;
     }
 
