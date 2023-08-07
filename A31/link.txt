@@ -1,0 +1,2 @@
+link: https://github.com/Boyu0422/ACS23JapAssignment/tree/main
+hashcode: ba2e0b52a2222e835130fe105255972739a075d0
